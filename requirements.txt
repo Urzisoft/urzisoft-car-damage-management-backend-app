@@ -1,0 +1,12 @@
+Django~=3.2.14
+djangorestframework~=3.12.4
+freezegun~=1.2.1
+whitenoise==5.3.0
+RequestClient
+pytz
+django-admin-interface==0.23.0
+django-cors-headers==3.8.0
+django-rest-knox~=4.1.0
+click
+Pillow
+django-rest-passwordreset==1.3.0

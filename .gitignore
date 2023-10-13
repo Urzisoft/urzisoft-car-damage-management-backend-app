@@ -160,3 +160,4 @@ cython_debug/
 .idea/
 MEDIA/
 Classifier/model_cache/cache.pkl
+Classifier/dataset

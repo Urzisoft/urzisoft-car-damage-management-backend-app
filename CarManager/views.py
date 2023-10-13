@@ -6,7 +6,7 @@ from CarManager.models import CarsReport
 from CarManager.serializer import CarsReportSerializer
 
 
-class CategorieRestInterface(APIView):
+class CarsReportRestInterface(APIView):
     @staticmethod
     def get(request):
         data_objects = CarsReport.objects.all()

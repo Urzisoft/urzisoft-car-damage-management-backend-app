@@ -35,3 +35,4 @@ packaging~=23.2
 kiwisolver~=1.4.5
 requests~=2.31.0
 zipp~=3.17.0
+scikit-learn

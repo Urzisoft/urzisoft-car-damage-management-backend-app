@@ -12,17 +12,20 @@ class CarsReportRestInterface(APIView):
     @staticmethod
     def get(request):
         data_objects = CarsReport.objects.all()
-        serializer = CarsReportSerializer(data_objects, many=True)
+        serializers = CarsReportSerializer(data_objects, many=True)
 
-        print(car_damage_severity_detector(settings.MEDIA_ROOT.replace('/MEDIA/', '') + serializer.data[0]['image_url']))
-
-        return Response(serializer.data)
+        return Response(serializers.data)
 
     @staticmethod
     def post(request):
         serializer = CarsReportSerializer(data=request.data)
 
         if serializer.is_valid():
+            serializer.save()
+            serializer.validated_data['damage_severity'] = \
+                car_damage_severity_detector(settings.MEDIA_ROOT + 'car-manager/data-to-identify/'
+                                             + str(serializer.validated_data['image_url']))
+
             serializer.save()
 
             return Response(data=serializer.data, status=status.HTTP_201_CREATED)

@@ -1,10 +1,10 @@
 from django.contrib import admin
 
-from CarManager.models import Car
+from CarManager.models import CarsReport
 
 
 class CarAdmin(admin.ModelAdmin):
     pass
 
 
-admin.site.register(Car, CarAdmin)
+admin.site.register(CarsReport, CarAdmin)

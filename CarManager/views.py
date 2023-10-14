@@ -19,7 +19,16 @@ class CarsReportRestInterface(APIView):
 
     @staticmethod
     def get(request):
-        data_objects = CarsReport.objects.all()
+        damage_dispatcher = request.GET.get('damage_severity')
+        service_done_dispatcher = request.GET.get('is_car_service_done')
+
+        if damage_dispatcher:
+            data_objects = CarsReport.objects.filter(damage_severity=damage_dispatcher)
+        elif service_done_dispatcher:
+            data_objects = CarsReport.objects.filter(done=service_done_dispatcher)
+        else:
+            data_objects = CarsReport.objects.all()
+
         serializers = CarsReportSerializer(data_objects, many=True)
 
         return Response(serializers.data)

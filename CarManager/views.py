@@ -1,8 +1,11 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from rest_framework import status, permissions
+from rest_framework import status
+from rest_framework.authentication import BasicAuthentication
+from rest_framework.permissions import IsAuthenticated
 from knox.models import AuthToken
 from rest_framework.generics import GenericAPIView
+from knox.auth import TokenAuthentication
 
 from CarDamageManagement import settings
 from Classifier.car_damage_severity_detector import car_damage_severity_detector
@@ -11,7 +14,8 @@ from CarManager.serializer import CarsReportSerializer, LoginUserSerializer, Use
 
 
 class CarsReportRestInterface(APIView):
-    permission_classes = [permissions.IsAuthenticated, ]
+    authentication_classes = [BasicAuthentication, TokenAuthentication]
+    permission_classes = [IsAuthenticated]
 
     @staticmethod
     def get(request):

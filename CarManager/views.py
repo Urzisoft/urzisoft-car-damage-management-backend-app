@@ -1,6 +1,6 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from rest_framework import status
+from rest_framework import status, permissions
 from knox.models import AuthToken
 from rest_framework.generics import GenericAPIView
 
@@ -11,6 +11,8 @@ from CarManager.serializer import CarsReportSerializer, LoginUserSerializer, Use
 
 
 class CarsReportRestInterface(APIView):
+    permission_classes = [permissions.IsAuthenticated, ]
+
     @staticmethod
     def get(request):
         data_objects = CarsReport.objects.all()

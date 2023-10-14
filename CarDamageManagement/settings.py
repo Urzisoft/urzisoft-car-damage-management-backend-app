@@ -11,14 +11,15 @@ ALLOWED_HOSTS = []
 
 
 INSTALLED_APPS = [
+    'CarManager',
+    'rest_framework',
+    'knox',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'rest_framework',
-    'CarManager',
 ]
 
 MIDDLEWARE = [
@@ -78,6 +79,10 @@ CACHES = {
         'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
         'LOCATION': 'unique-snowflake',
     }
+}
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': ('knox.auth.TokenAuthentication',)
 }
 
 LANGUAGE_CODE = 'en-us'

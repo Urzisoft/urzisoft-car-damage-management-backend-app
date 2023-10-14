@@ -1,11 +1,13 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
+from knox.models import AuthToken
+from rest_framework.generics import GenericAPIView
 
 from CarDamageManagement import settings
 from Classifier.car_damage_severity_detector import car_damage_severity_detector
 from CarManager.models import CarsReport
-from CarManager.serializer import CarsReportSerializer
+from CarManager.serializer import CarsReportSerializer, LoginUserSerializer, UserSerializer
 
 
 class CarsReportRestInterface(APIView):
@@ -32,3 +34,15 @@ class CarsReportRestInterface(APIView):
 
         return Response(data=serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+
+class LoginAPI(GenericAPIView):
+    serializer_class = LoginUserSerializer
+
+    def post(self, request, *args, **kwargs):
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        user = serializer.validated_data
+        return Response({
+            "user": UserSerializer(user, context=self.get_serializer_context()).data,
+            "token": AuthToken.objects.create(user)[1]
+        })

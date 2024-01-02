@@ -2,7 +2,7 @@ import matplotlib.pyplot as plt
 import cv2
 import os
 
-STANDARD_DATA_DIRECTORY_STRUCTURE = 'dataset/validation/'
+STANDARD_DATA_DIRECTORY_STRUCTURE = 'dataset/training/'
 STANDARD_RESIZE_VALUE = 300
 classifier_classes = {'minor': 0, 'moderate': 1, 'severe': 2}
 

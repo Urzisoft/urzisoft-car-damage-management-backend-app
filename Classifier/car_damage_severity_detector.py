@@ -11,6 +11,8 @@ def car_damage_severity_detector(image_source):
     model = cache.get(model_cache_key)
     model_rel_path = 'Classifier/model_cache/cache.pkl'
 
+    print(model)
+
     if model is None:
         model_path = os.path.realpath(model_rel_path)
         model = joblib.load(model_path)
